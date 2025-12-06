@@ -2,8 +2,9 @@ import React from "react";
 import { HiMenu } from "react-icons/hi";
 import CustomNavLink from "../Common/CustomNavLink";
 import { Link, NavLink } from "react-router";
-import logo from "../../assets/logo.png";
+// import logo from "../../assets/logo.png";
 import { FaMoon, FaSun } from "react-icons/fa";
+import Logo from "../Common/Logo";
 
 const Navbar = ({ theme, toggleTheme }) => {
   const user = null;
@@ -33,7 +34,6 @@ const Navbar = ({ theme, toggleTheme }) => {
               tabIndex={0}
               className="menu menu-sm dropdown-content mt-3 z-10 p-2 shadow bg-base-100 rounded-box w-52"
             >
-              {/* Mobile Menu Links */}
               <CustomNavLink links={links} />
 
               <div className="divider my-2"></div>
@@ -69,25 +69,19 @@ const Navbar = ({ theme, toggleTheme }) => {
             </ul>
           </div>
 
-          {/* Logo */}
-          <Link to="/" className="flex items-center gap-2 text-xl font-bold">
-            <img src={logo} alt="RouteLynk Logo" className="w-10 md:w-12" />
-            <span className="text-gradient text-2xl md:text-3xl font-black">
-              RouteLynk
-            </span>
-          </Link>
+          {/* Reusable Logo Component */}
+          <Logo size="md" />
         </div>
 
-        {/* Center: Desktop Menu */}
+        {/* Desktop Menu */}
         <div className="navbar-center hidden lg:flex">
           <ul className="menu menu-horizontal px-1 space-x-2">
             <CustomNavLink links={links} />
           </ul>
         </div>
 
-        {/* Right Side: Theme Toggle + Auth Buttons */}
+        {/* Right Side */}
         <div className="navbar-end flex items-center gap-3">
-          {/* Desktop Theme Toggle */}
           <button
             onClick={toggleTheme}
             className="btn btn-ghost btn-circle text-primary text-xl"
@@ -95,13 +89,11 @@ const Navbar = ({ theme, toggleTheme }) => {
             {theme === "routelynk-dark" ? <FaSun /> : <FaMoon />}
           </button>
 
-          {/* Desktop Auth Buttons */}
           {!user && (
             <div className="hidden md:flex gap-2">
               <NavLink to="/login" className="btn btn-gradient font-semibold">
                 Login
               </NavLink>
-
               <NavLink
                 to="/register"
                 className="btn btn-gradient font-semibold"
