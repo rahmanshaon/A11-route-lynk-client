@@ -5,6 +5,7 @@ import useAuth from "../../hooks/useAuth";
 import { useForm } from "react-hook-form";
 import SocialLogin from "../../components/Shared/SocialLogin";
 import { toast } from "react-toastify";
+import { saveUser } from "../../api/auth";
 
 const Register = () => {
   const [showPassword, setShowPassword] = useState(false);
@@ -20,11 +21,24 @@ const Register = () => {
   const onSubmit = async (data) => {
     const { email, password, name, photoURL } = data;
     try {
-      await createUser(email, password);
+      // Create User
+      const result = await createUser(email, password);
+
+      // Update User Profile
       await updateUserProfile(name, photoURL);
-      toast.success(`Welcome, ${name}! Your account has been created.`);
+
+      // Save User to Database
+      const dbResponse = await saveUser({
+        email,
+        displayName: name,
+        photoURL,
+      });
+      console.log("Database Save Response:", dbResponse);
+
+      toast.success(`Welcome, ${name}! Account created.`);
       navigate("/");
     } catch (error) {
+      console.error(error);
       toast.error(error.message);
     }
   };

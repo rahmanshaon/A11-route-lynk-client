@@ -2,7 +2,7 @@ import React from "react";
 import { HiMenu } from "react-icons/hi";
 import CustomNavLink from "../Common/CustomNavLink";
 import { Link, NavLink, useNavigate } from "react-router";
-import { FaMoon, FaSun } from "react-icons/fa";
+import { FaMoon, FaSun, FaUserCircle } from "react-icons/fa";
 import Logo from "../Common/Logo";
 import useAuth from "../../hooks/useAuth";
 import { toast } from "react-toastify";
@@ -121,7 +121,7 @@ const Navbar = ({ theme, toggleTheme }) => {
                 className="mt-3 z-1 p-2 shadow menu menu-sm dropdown-content bg-base-100 rounded-box w-52 border border-base-200"
               >
                 <li className="menu-title px-4 py-2">
-                  <span className="text-primary font-bold">
+                  <span className="text-primary text-center font-bold">
                     {user.displayName}
                   </span>
                 </li>
@@ -130,10 +130,11 @@ const Navbar = ({ theme, toggleTheme }) => {
                     Dashboard
                   </Link>
                 </li>
+                <div className="divider my-0"></div>
                 <li>
                   <button
                     onClick={handleLogOut}
-                    className="text-red-500 font-semibold"
+                    className="btn btn-gradient text-white font-semibold"
                   >
                     Logout
                   </button>

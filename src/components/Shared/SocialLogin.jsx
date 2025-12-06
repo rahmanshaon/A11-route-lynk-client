@@ -3,6 +3,7 @@ import { FaGoogle } from "react-icons/fa";
 import useAuth from "../../hooks/useAuth";
 import { useLocation, useNavigate } from "react-router";
 import { toast } from "react-toastify";
+import { saveUser } from "../../api/auth";
 
 const SocialLogin = () => {
   const { googleSignIn } = useAuth();
@@ -13,15 +14,16 @@ const SocialLogin = () => {
 
   const handleGoogleSignIn = async () => {
     try {
-      console.log("SocialLogin: Attempting Google Sign-in...");
+      // Google Login
       const result = await googleSignIn();
-      console.log("SocialLogin: Success", result.user);
 
-      //  toast.success("Login Successful!");
+      // Save User to Database
+      await saveUser(result.user);
+
       toast.success(`Welcome, ${result.user.displayName}!`);
       navigate(from, { replace: true });
     } catch (error) {
-      console.error("SocialLogin: Error", error);
+      console.error(error);
       toast.error("Google Sign-In failed.");
     }
   };
