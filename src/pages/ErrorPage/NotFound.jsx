@@ -1,7 +1,5 @@
 import React from "react";
 import { useRouteError } from "react-router";
-import Navbar from "../../components/Shared/Navbar";
-import Footer from "../../components/Shared/Footer";
 
 const NotFound = () => {
   const error = useRouteError();
@@ -10,7 +8,6 @@ const NotFound = () => {
 
   return (
     <div className="flex flex-col min-h-screen">
-      <Navbar />
       <div className="flex-1 flex flex-col items-center justify-center text-center px-4">
         <h1 className="text-7xl font-extrabold text-gray-800 mb-4">{status}</h1>
         <p className="text-2xl font-semibold text-red-600 mb-2">{message}</p>
@@ -18,7 +15,6 @@ const NotFound = () => {
           Something went wrong. Please try again later.
         </p>
       </div>
-      <Footer />
     </div>
   );
 };

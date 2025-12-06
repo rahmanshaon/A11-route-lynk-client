@@ -3,8 +3,9 @@ import { HiMenu } from "react-icons/hi";
 import CustomNavLink from "../Common/CustomNavLink";
 import { Link, NavLink } from "react-router";
 import logo from "../../assets/logo.png";
+import { FaMoon, FaSun } from "react-icons/fa";
 
-const Navbar = () => {
+const Navbar = ({ theme, toggleTheme }) => {
   const user = null;
 
   const links = [
@@ -13,7 +14,13 @@ const Navbar = () => {
   ];
 
   return (
-    <div className="bg-base-100 shadow-sm sticky top-0 z-50">
+    <div
+      className={`bg-base-100 ${
+        theme === "routelynk-light"
+          ? "shadow-sm"
+          : "shadow-[0_4px_16px_rgba(0,0,0,0.45)]"
+      } border-b border-base-300 backdrop-blur-sm sticky top-0 z-50`}
+    >
       <nav className="navbar container mx-auto px-4">
         {/* Left Side: Logo & Mobile Dropdown */}
         <div className="navbar-start">
@@ -31,11 +38,24 @@ const Navbar = () => {
 
               <div className="divider my-2"></div>
 
+              {/* Mobile Theme Toggle */}
+              <li className="flex justify-center py-2">
+                <button
+                  onClick={toggleTheme}
+                  className="btn btn-ghost text-primary text-xl"
+                >
+                  {theme === "routelynk-dark" ? <FaSun /> : <FaMoon />}
+                </button>
+              </li>
+
               {/* Mobile Auth Buttons */}
               {!user && (
                 <>
                   <li>
-                    <NavLink to="/login" className="btn btn-sm btn-gradient mb-2">
+                    <NavLink
+                      to="/login"
+                      className="btn btn-sm btn-gradient mb-2"
+                    >
                       Login
                     </NavLink>
                   </li>
@@ -65,14 +85,27 @@ const Navbar = () => {
           </ul>
         </div>
 
-        {/* Right Side: Auth Buttons (Desktop Only) */}
-        <div className="navbar-end">
+        {/* Right Side: Theme Toggle + Auth Buttons */}
+        <div className="navbar-end flex items-center gap-3">
+          {/* Desktop Theme Toggle */}
+          <button
+            onClick={toggleTheme}
+            className="btn btn-ghost btn-circle text-primary text-xl"
+          >
+            {theme === "routelynk-dark" ? <FaSun /> : <FaMoon />}
+          </button>
+
+          {/* Desktop Auth Buttons */}
           {!user && (
             <div className="hidden md:flex gap-2">
               <NavLink to="/login" className="btn btn-gradient font-semibold">
                 Login
               </NavLink>
-              <NavLink to="/register" className="btn btn-gradient font-semibold">
+
+              <NavLink
+                to="/register"
+                className="btn btn-gradient font-semibold"
+              >
                 Register
               </NavLink>
             </div>
