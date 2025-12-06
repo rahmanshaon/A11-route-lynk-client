@@ -1,14 +1,67 @@
 /* Google font link */
 @import url("https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap");
 
-/* Tailwind CSS and daisyUI */
+/* Tailwind & DaisyUI setup */
 @import "tailwindcss";
-@plugin "daisyui";
+@plugin "daisyui" {
+  themes: light --default;
+}
 
+/* Global Font */
 @theme {
   --font-sans: "Inter", sans-serif;
 }
 
+/* -----LIGHT THEME----- */
+@plugin "daisyui/theme" {
+  name: "routelynk-light";
+  default: true;
+
+  /* Brand Colors (Transport Branding) */
+  --color-primary: #0052cc;
+  --color-primary-content: #ffffff;
+  --color-accent: #00b4d8;
+  --color-secondary: #64748b;
+
+  /* Neutral & Backgrounds */
+  --color-neutral: #0f172a;
+  --color-base-100: #ffffff;
+  --color-base-200: #f1f5f9;
+  --color-base-300: #e2e8f0;
+  --color-base-content: #0f172a;
+}
+
+/* -----DARK THEME----- */
+@plugin "daisyui/theme" {
+  name: "routelynk-dark";
+
+  /* Brand Colors */
+  --color-primary: #3793ff;
+  --color-primary-content: #000000;
+  --color-accent: #4dd7ff;
+  --color-secondary: #94a3b8;
+
+  /* Dark Background System */
+  --color-neutral: #cbd5e1;
+  --color-base-100: #0f172a;
+  --color-base-200: #1e293b;
+  --color-base-300: #334155;
+  --color-base-content: #e2e8f0;
+}
+
 body {
   font-family: var(--font-sans);
+  @apply bg-base-100 text-base-content min-h-screen;
+}
+
+.btn-gradient {
+  @apply text-white border-none bg-[linear-gradient(125deg,#0052D4_0%,#4364F7_40%,#6FB1FC_100%)]
+  hover:bg-[linear-gradient(125deg,#6FB1FC_0%,#4364F7_50%,#0052D4_100%)]
+  hover:scale-105 transition-transform ease-in-out duration-200 shadow-lg;
+}
+
+.text-gradient {
+  @apply bg-[linear-gradient(125deg,#0052D4_0%,#4364F7_40%,#6FB1FC_100%)]
+  hover:bg-[linear-gradient(125deg,#6FB1FC_0%,#4364F7_50%,#0052D4_100%)]
+  bg-clip-text text-transparent transition-all duration-500;
 }
